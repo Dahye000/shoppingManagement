@@ -90,6 +90,46 @@ public class memberHandle {
 		return false;
 	}
 }
+
 		
-		
+/**
+@name output
+@title 로그인
+@detail 로그인 메소드
+@author 김영임
+@since 2021.06.10
+@version 1.0
+============edit log============
+Date - Author - Note
+2021.06.10 - 김영임 - 초안 작성
+*/
+public static void memberLogin() {
+	try {
+		  // json 파일 읽기
+		  Object object = parser.parse(new FileReader("memberlist.json"));
+		  
+		  // Object에서 JSONArray로 변경
+		  array = (JSONArray) object;
+		  
+		  // 로그인 메소드
+	      System.out.print("아이디 : "); String id = sc.nextLine();
+	      System.out.print("패스워드 : "); String pwd = sc.nextLine();
+		  
+          for(int i = 0 ; i < array.size() ; i++) {
+		     if(array.get(i).get("id").equals(id) && array.get(i).get("pwd").equals(pwd)) {
+			   System.out.println("환영합니다.");
+			   System.out.println("로그인에 성공하였습니다. \n");
+			   return;
+		     } 
+		  }
+          System.out.println("로그인에 실패하였습니다.");
+	}
+		  
+			  
+	  // 예외 처리
+	catch (FileNotFoundException e) { e.printStackTrace(); } 
+	catch (IOException e) { e.printStackTrace(); } 
+	catch (ParseException e) { e.printStackTrace(); }
+}
+
 	
