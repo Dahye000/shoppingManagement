@@ -4,10 +4,11 @@
 		@detail json파일(장바구니)에 기존에 있는 상품을 저장하고 출력하는 클래스
 		@author 민정현
 		@since 2021.06.03
-	   	@version 1.0
+	   	@version 1.1
 	   	============edit log============
 	   	Date - Author - Note
 	   	2021.06.03 - 민정현 - 초안 작성
+	   	2021.06.10 - 민정현 - input 메소드 수정
 */
 package shop;
 
@@ -36,10 +37,11 @@ public class Cart {
 	   @detail 장바구니 안에 상품을 추가하는 메소드
 	   @author 민정현
 	   @since 2021.06.03
-	   @version 1.0
+	   @version 1.1
 	   ============edit log============
 	   Date - Author - Note
 	   2021.06.03 - 민정현 - 초안 작성
+	   2021.06.10 - 민정현 - 추가 방식 변경 (파라미터 받아 와서 입력)
 	*/
 	public static void input(JSONObject product) {
 		try {

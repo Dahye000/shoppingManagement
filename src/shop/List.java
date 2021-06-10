@@ -4,10 +4,13 @@
 		@detail 상품을 json 형태로 저장하며 관련 메소드를 취급하는 클래스
 		@author 김동엽
 		@since 2021.06.03
-	   	@version 1.0
+	   	@version 1.3
 	   	============edit log============
 	   	Date - Author - Note
 	   	2021.06.03 - 김동엽 - 초안 작성
+	   	2021.06.03 - 민정현 - delete 메소드 수정
+	   	2021.06.10 - 민정현 - search 메소드 추가
+	   	2021.06.10 - 민정현 - detail 메소드 추가
 */
 
 package shop;

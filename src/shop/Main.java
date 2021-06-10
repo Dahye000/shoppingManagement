@@ -4,15 +4,19 @@
 	@detail 각 클래스의 메소드에 접근할 수 있는 메뉴 클래스
 	@author 민정현
 	@since 2021.06.03
-	@version 1.0
+	@version 1.2
 	============edit log============
 	Date - Author - Note
 	2021.06.03 - 민정현 - 초안 작성
+	2021.06.10 - 민정현 - 메뉴 개편 (회원가입, 로그인 추가 / 장바구니 상품 입력)
+	2021.06.10 - 민정현 - 로그인 시 이름 나오도록 수정
+	
  */
 
 package shop;
 import java.util.Scanner;
 public class Main {
+	
 
 	public static void main(String[] args) {
 		// Scanner 객체 생성
@@ -26,12 +30,28 @@ public class Main {
 		// 사용자 메뉴 while문
 		while(true) {
 			System.out.println("--------------------");
-			System.out.println("쇼핑몰 (사용자)");
-			System.out.println("1. 상품 검색");
-			System.out.println("2. 장바구니");
-			System.out.println("3. 관리자 모드");
-			System.out.println("--------------------");
-			System.out.print("번호를 입력하세요 : ");
+			if(memberHandle.member.get("name")==null)
+			{
+				System.out.println("쇼핑몰 (사용자)");
+				System.out.println("1. 상품 검색");
+				System.out.println("2. 장바구니");
+				System.out.println("3. 회원가입");
+				System.out.println("4. 로그인");
+				System.out.println("5. 관리자 모드");
+				System.out.println("--------------------");
+				System.out.print("번호를 입력하세요 : ");
+			}
+			else {
+				System.out.println("쇼핑몰 (" + memberHandle.member.get("name") + "님)");
+				System.out.println("1. 상품 검색");
+				System.out.println("2. 장바구니");
+				System.out.println("3. 회원가입");
+				System.out.println("4. 로그인");
+				System.out.println("5. 관리자 모드");
+				System.out.println("--------------------");
+				System.out.print("번호를 입력하세요 : ");
+			}
+			
 			
 			// 메뉴 입력 후 switch문으로 해당 메소드 실행
 			menu = scanner.nextInt();
@@ -71,8 +91,13 @@ public class Main {
 						}
 					}
 					break;
-					
-				case 3: // 관리자 모드
+				case 3: // 회원가입
+					memberHandle.memberInsert();
+					break;
+				case 4: // 로그인
+					memberHandle.memberLogin();
+					break;
+				case 5: // 관리자 모드
 					adminMenu = 0; // 관리자 메뉴 변수 초기화
 					
 					// 관리자 메뉴 while문
