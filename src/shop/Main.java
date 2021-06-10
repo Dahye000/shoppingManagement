@@ -27,7 +27,7 @@ public class Main {
 		while(true) {
 			System.out.println("--------------------");
 			System.out.println("쇼핑몰 (사용자)");
-			System.out.println("1. 상품 출력");
+			System.out.println("1. 상품 검색");
 			System.out.println("2. 장바구니");
 			System.out.println("3. 관리자 모드");
 			System.out.println("--------------------");
@@ -37,8 +37,8 @@ public class Main {
 			menu = scanner.nextInt();
 			switch (menu) { // 메뉴
 			
-				case 1: // 상품 출력
-					List.output();
+				case 1: // 상품 검색
+					List.search();
 					break;
 					
 				case 2: // 장바구니

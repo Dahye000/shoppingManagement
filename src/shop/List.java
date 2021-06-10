@@ -54,10 +54,10 @@ public class List {
         product.put("productName", scanner.next());
         
         System.out.println("가격을 입력해주세요");
-        product.put("price", scanner.nextInt());
+        product.put("price", scanner.next());
         
         System.out.println("수량을 입력해주세요");
-        product.put("amount", scanner.nextInt());
+        product.put("amount", scanner.next());
         
         // JSONArray에 상품 정보가 입력된 JSONObject 입력
         array.add(product);
@@ -94,13 +94,14 @@ public class List {
 	    	  // Object에서 JSONArray로 변경
 	    	  array = (JSONArray) object;
 	    	  
-	    	  // for문으로 전체 상품 목록 출력
+	    	  // 상품 전체 출력
 	    	  for (int i=0; i<array.size(); i++) {
+	    		  
 		            JSONObject obj = (JSONObject) array.get(i);
-		            System.out.print("아이디: " + obj.get("id") + "\t");
-		            System.out.print("이름: " + obj.get("productName") + "\t");
-		            System.out.print("가격: " + obj.get("price") + "\t");
-		            System.out.println("수량: " + obj.get("amount") + "\t");
+			            System.out.print("아이디: " + obj.get("id") + "\t");
+			            System.out.print("이름: " + obj.get("productName") + "\t");
+			            System.out.print("가격: " + obj.get("price") + "\t");
+			            System.out.println("수량: " + obj.get("amount") + "\t");
 		         }
 		         
 		      }
@@ -111,6 +112,55 @@ public class List {
 	      
 	   }
 
+	/**
+	   @name search
+	   @title 상품 검색
+	   @detail 상품을 검색하는 메소드
+	   @author 민정현
+	   @since 2021.06.10
+	   @version 1.0
+	   ============edit log============
+	   Date - Author - Note
+	   2021.06.10 - 민정현 - 초안 작성
+	 */
+	public static void search() {
+		try {
+			// json 파일 읽기
+			Object object = parser.parse(new FileReader("product_list.json"));
+  
+			// Object에서 JSONArray로 변경
+			array = (JSONArray) object;
+  
+			// 검색 키워드 입력
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("검색 키워드를 입력해주세요");
+			String word = scanner.next();
+  
+			// 검색 목록 생성
+			JSONArray list = new JSONArray();
+  
+			// for문으로 문자열 비교 및 목록에 저장
+			for (int i=0; i<array.size(); i++) {
+	  
+				JSONObject obj = (JSONObject) array.get(i);
+				String name = (String)obj.get("productName");
+				if(name.contains(word)) {
+					System.out.print("이름: " + obj.get("productName") + "\t");
+					System.out.print("가격: " + obj.get("price") + "\t");
+					System.out.println("수량: " + obj.get("amount") + "\t");
+			        list.add(obj);
+				}
+			}
+			
+		}
+		
+		// 예외 처리
+		catch (FileNotFoundException e) { e.printStackTrace(); } 
+		catch (IOException e) { e.printStackTrace(); } 
+		catch (ParseException e) { e.printStackTrace(); }
+			      
+		}
+	
 	/**
 	   @name delete
 	   @title 상품 삭제 메소드
