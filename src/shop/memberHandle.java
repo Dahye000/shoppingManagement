@@ -85,14 +85,7 @@ public class memberHandle {
 			
 	
 
-	private static boolean isUniqueID(String id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-}
-
-		
-/**
+	/**
 @name output
 @title 로그인
 @detail 로그인 메소드
@@ -132,4 +125,38 @@ public static void memberLogin() {
 	catch (ParseException e) { e.printStackTrace(); }
 }
 
+private boolean isUniqueID(String uid){ // 아이디의 중복 여부를 리턴
+		try {
+			// json 파일 읽기
+			Object object = parser.parse(new FileReader("memberlist.json"));
+  
+			// Object에서 JSONArray로 변경
+			array = (JSONArray) object;
+  
+			if(array.size()==0) return true;
+			
+			for(int i=0; i<array.size(); i++) {
+				JSONObject obj = (JSONObject)array.get(i);
+				String id = (String)obj.get("id");
+				if(uid.equals(id)) {
+					return false;
+					
+				}
+			}
+			
+			
+		}
+		
+		// 예외 처리
+		catch (FileNotFoundException e) { e.printStackTrace(); } 
+		catch (IOException e) { e.printStackTrace(); } 
+		catch (ParseException e) { e.printStackTrace(); }
+		return true;
+		
+	}
+}
+
+		
+
+	
 	
