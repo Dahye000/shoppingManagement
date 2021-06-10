@@ -141,17 +141,45 @@ public class List {
   
 			// for문으로 문자열 비교 및 목록에 저장
 			for (int i=0; i<array.size(); i++) {
-	  
 				JSONObject obj = (JSONObject) array.get(i);
 				String name = (String)obj.get("productName");
 				if(name.contains(word)) {
-					System.out.print("이름: " + obj.get("productName") + "\t");
-					System.out.print("가격: " + obj.get("price") + "\t");
-					System.out.println("수량: " + obj.get("amount") + "\t");
 			        list.add(obj);
 				}
 			}
 			
+			double totalPage = Math.ceil((double)list.size()/5);
+			// 목록을 5개씩 출력
+			for (int i=0; i<totalPage; i++) {
+				System.out.println("");
+				int page = i+1;
+				System.out.println("(" + word + ")" + " 검색 결과 " + page + "번째 페이지");
+				
+				for(int j=0; j<5; j++) {
+					if(j>=list.size()) break;
+					JSONObject obj = (JSONObject) list.get(j);
+					System.out.print(j + " - 이름: " + obj.get("productName") + "\t");
+					System.out.println("가격: " + obj.get("price") + "\t");
+				}
+				
+				System.out.println("상품 번호를 입력해주세요 (다음 페이지: 5, 돌아가기: 6)");
+				int number = scanner.nextInt();
+				switch(number) {
+					case 0: List.detail((JSONObject)list.get(0)); break;
+					case 1: List.detail((JSONObject)list.get(1)); break;
+					case 2: List.detail((JSONObject)list.get(2)); break;
+					case 3: List.detail((JSONObject)list.get(3)); break;
+					case 4: List.detail((JSONObject)list.get(4)); break;
+					case 5:
+						for(int j=0; j<5; j++)
+							list.remove(0);
+						break;
+					case 6:
+						i = list.size();
+						break;
+					
+				}
+			}
 		}
 		
 		// 예외 처리
@@ -160,6 +188,36 @@ public class List {
 		catch (ParseException e) { e.printStackTrace(); }
 			      
 		}
+	
+	/**
+	   @name detail
+	   @title 상품 상세페이지 메소드
+	   @detail 상품 상세 정보를 출력하는 메소드
+	   @author 민정현
+	   @since 2021.06.10
+	   @version 1.0
+	   ============edit log============
+	   Date - Author - Note
+	   2021.06.10 - 민정현 - 초안 작성
+	*/
+	public static void detail(JSONObject product) {
+		System.out.println("이름: " + product.get("productName"));
+		System.out.println("가격: " + product.get("price"));
+		System.out.println("수량: " + product.get("amount"));
+		System.out.println("1. 돌아가기 2. 장바구니에 담기");
+		int number = scanner.nextInt();
+		switch(number) {
+			case 1:
+				break;
+			case 2:
+				Cart.input(product);
+				break;
+			default:
+				System.out.println("유효하지 않은 값입니다. 목록으로 돌아갑니다.");
+				break;
+		}
+		
+	}
 	
 	/**
 	   @name delete
